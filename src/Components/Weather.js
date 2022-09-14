@@ -1,14 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { selectDisplay } from "../redux/slices/displayCountrySlice";
+import {setFalse,setTrue} from "../redux/slices/loadingSlice"
 const Weather = () => {
   const [weather, setWeather] = useState();
   let display = useSelector(selectDisplay);
   let lat = display.capitalInfo.latlng[0];
   let long = display.capitalInfo.latlng[1];
+  let dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setTrue())
     const options = {
       method: "GET",
       url: "https://weatherapi-com.p.rapidapi.com/current.json",
@@ -22,10 +25,12 @@ const Weather = () => {
     axios
       .request(options)
       .then((response) => {
+        dispatch(setFalse())
         setWeather(response.data);
       })
       .catch(function (error) {
         console.error(error);
+        dispatch(setFalse())
       });
   }, []);
   return (

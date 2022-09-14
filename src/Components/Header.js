@@ -10,6 +10,7 @@ import {
   selectDisplay,
   deleteDisplayCountry,
 } from "../redux/slices/displayCountrySlice";
+import {setFalse,setTrue} from "../redux/slices/loadingSlice"
 const Header = () => {
   let currentDisplay = useSelector(selectDisplay);
   let dispatch = useDispatch();
@@ -19,9 +20,7 @@ const Header = () => {
       <div className="home">
         <BsFillFlagFill style={{ marginRight: "10px" }} fontSize="1.6em" />
         <h3 className="home-country">
-            {
-                currentDisplay && currentDisplay.name.common
-            }
+          {currentDisplay && currentDisplay.name.common}
         </h3>
       </div>
       <div className="country-input">
@@ -32,16 +31,19 @@ const Header = () => {
         />
         <button
           onClick={() => {
+            dispatch(setTrue())
+            console.log()
             axios
               .get(`https://restcountries.com/v3.1/name/${input}`)
               .then((res) => {
-                console.log(res.data);
-                dispatch(deleteDisplayCountry())
+                dispatch(setFalse())
+                dispatch(deleteDisplayCountry());
                 dispatch(deletePotentialCountries());
                 dispatch(setPotentialCountries(res.data));
               })
               .catch((err) => {
                 alert("No countries found that match your search!");
+                dispatch(setFalse())
               });
           }}
         >
