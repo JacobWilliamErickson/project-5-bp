@@ -11,13 +11,10 @@ export const loadingSlice = createSlice({
     setFalse: (state) => {
       state.value = false;
     },
-    toggleLoading: (state) => {
-      state.value = !state.value;
-    },
   },
 });
 
-export const { setTrue, setFalse, toggleLoading } = loadingSlice.actions;
+export const { setTrue, setFalse} = loadingSlice.actions;
 export const selectLoading = (state) => state.isLoading.value;
 
 export default loadingSlice.reducer;
