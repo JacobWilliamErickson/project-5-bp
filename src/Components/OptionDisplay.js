@@ -5,7 +5,6 @@ import { selectPotentials } from "../redux/slices/potentialCountriesSlice";
 const OptionDisplay = () => {
   let dispatch = useDispatch();
   let currentPotentials = useSelector(selectPotentials);
-  console.log(currentPotentials);
   return (
     <div className="stack">
       {currentPotentials.map((e, i) => {

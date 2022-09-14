@@ -9,17 +9,19 @@ const Overview = () => {
       <h2> {currentDisplay.name.common}</h2>
 
       <table className="overview-table">
+        <tbody>
+
         <tr>
           <td>Borders: </td>
           <td>
             {currentDisplay.borders
               ? currentDisplay.borders.map((e, i, arr) => {
-                  if (i + 1 === arr.length) {
-                    return `${e}`;
-                  } else {
-                    return `${e}, `;
-                  }
-                })
+                if (i + 1 === arr.length) {
+                  return `${e}`;
+                } else {
+                  return `${e}, `;
+                }
+              })
               : "N/A"}
           </td>
         </tr>
@@ -27,7 +29,7 @@ const Overview = () => {
           <td> Capital: </td>
           {currentDisplay.capital.map((e)=> (
             <td>{e}</td>
-          ) )}
+            ) )}
         </tr>
         <tr>
             <td>Population: </td>
@@ -37,7 +39,7 @@ const Overview = () => {
           <td> Continents: </td>
           {currentDisplay.continents.map((e)=> (
             <td>{e}</td>
-          ))}
+            ))}
         </tr>
         <tr>
             <td>Independent: </td>
@@ -51,6 +53,7 @@ const Overview = () => {
             <td>Member of UN: </td>
             <td>{currentDisplay.unMember ? 'True' : 'False'}</td>
         </tr>
+            </tbody>
       </table>
     </div>
   );
